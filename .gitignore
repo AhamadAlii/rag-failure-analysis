@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+venv/
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python build
+*.egg-info/
+dist/
+build/
+
+# Test cache
+.pytest_cache/
+.coverage
+
+# Results (optional)
+results/*.csv
+
+# Model artifacts
+data/faiss.index
+data/*.meta
+
+# Hugging Face cache (if inside project)
+.cache/
