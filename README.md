@@ -12,11 +12,15 @@ research experiments are left as placeholders to be implemented later.
 
 ## Project Overview
 
-The pipeline loads a small slice of SQuAD v2, chunks each context, embeds the
-chunks with a sentence-transformers model, stores them in a FAISS index,
-retrieves the top-k chunks for each question, prompts a Groq-hosted LLM to answer
-using only that context, and finally scores the answers with Exact Match and
-token F1.
+This project implements a Retrieval-Augmented Generation (RAG) pipeline for question answering on the SQuAD v2 dataset.
+
+The baseline system uses:
+- Sentence-Transformers for embeddings
+- FAISS for vector search
+- Groq Llama 3.3 70B for answer generation
+- Exact Match (EM) and Token F1 for evaluation
+
+As an initial research extension, a prompt engineering experiment was conducted to evaluate the impact of concise prompting on QA performance.
 
 ## Installation
 
@@ -104,11 +108,27 @@ rag-failure-analysis/
 └── README.md
 ```
 
+## Experimental Results
+
+| Experiment | Exact Match | Token F1 |
+|------------|------------:|---------:|
+| Baseline Prompt | 0.37 | 0.53 |
+| Improved Prompt | **0.62** | **0.682** |
+
+### Observation
+
+A more constrained prompt significantly reduced verbose answers and improved both Exact Match and Token F1 without modifying the retrieval pipeline.
+
+## Notes
+
+This project uses the Groq API for answer generation.
+
+If a `429 RateLimitError` occurs, the free-tier token quota has been exhausted. The project can be rerun after the quota resets or by using another valid Groq API key.
+
 ## Future Work
 
-- Implement the three experiments in `experiments/` (chunk size, top-k,
-  embedding model sweeps).
-- Add retrieval-failure diagnostics (e.g. was the gold answer present in any
-  retrieved chunk?).
-- Include unanswerable SQuAD v2 questions to measure "I don't know" behavior.
-- Add plots comparing metrics across configurations.
+- Evaluate different chunk sizes (100, 200, 400, 800)
+- Compare top-k retrieval settings (1, 3, 5)
+- Evaluate alternative embedding models
+- Perform detailed retrieval failure analysis
+- Visualize performance across configurations
