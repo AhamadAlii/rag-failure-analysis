@@ -28,7 +28,7 @@ class PipelineConfig:
         results_path: CSV file path where per-question results are stored.
     """
 
-    num_examples: int = 20
+    num_examples: int = 100
     chunk_size: int = 100
     chunk_overlap: int = 20
     top_k: int = 3

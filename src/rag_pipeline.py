@@ -12,8 +12,16 @@ from src.vector_store import VectorStore
 
 logger = get_logger(__name__)
 
-PROMPT_TEMPLATE = """You are a helpful assistant. Answer the question using ONLY the context below.
-If the answer is not present in the context, reply exactly with: I don't know.
+PROMPT_TEMPLATE = """You are an expert question-answering system.
+
+Rules:
+1. Use ONLY the provided context.
+2. Return ONLY the final answer.
+3. Keep the answer as short as possible.
+4. Do NOT explain your reasoning.
+5. Do NOT add extra words, sentences, or punctuation.
+6. If the answer cannot be found in the context, reply exactly:
+I don't know.
 
 Context:
 {context}
