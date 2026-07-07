@@ -31,7 +31,7 @@ class PipelineConfig:
     num_examples: int = 100
     chunk_size: int = 100
     chunk_overlap: int = 20
-    top_k: int = 3
+    top_k: int = 1
     embedding_model: str = "sentence-transformers/all-MiniLM-L6-v2"
     llm_model: str = field(
         default_factory=lambda: os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
